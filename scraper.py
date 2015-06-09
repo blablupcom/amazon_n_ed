@@ -30,7 +30,8 @@ for url in urls:
              todays_date = str(datetime.now())
              print link
          else:
-             print 'there is no a newer edition of this item'
+             link = 'there is no a newer edition of this item'
+             print link
          filename = entity_id + "_" +  ".csv"
          scraperwiki.sqlite.save(unique_keys=['l'], data={"l": link, "f": filename, "d": todays_date })
          while titles == 'Robot Check':
