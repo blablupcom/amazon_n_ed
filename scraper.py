@@ -33,7 +33,7 @@ for url in urls:
              link = 'there is no a newer edition of this item'
              print link
          filename = entity_id + "_" +  ".csv"
-         scraperwiki.sqlite.save(unique_keys=['l'], data={"l": link, "f": filename, "d": todays_date })
+         scraperwiki.sqlite.save(unique_keys=['l'], data={"l": link, "f": url, "d": todays_date })
          while titles == 'Robot Check':
              try:
                     pages = requests.get(url, headers = user_agent)
