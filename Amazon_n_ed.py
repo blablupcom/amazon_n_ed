@@ -13,7 +13,8 @@ entity_id = "E37"
 urls = ["http://www.amazon.com/dp/020559526X",'http://www.amazon.com/dp/0205881394','http://www.amazon.com/dp/0078029546',
 'http://www.amazon.com/dp/0132729822']
 user_agent = {'User-Agent': 'Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)'}
-
+link = ''
+todays_date = ''
 for url in urls:
          try:
             pages = requests.get(url, headers = user_agent)
