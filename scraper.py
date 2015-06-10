@@ -30,7 +30,7 @@ def amazon_req(titles, asin, newed_asin, flag_asin, todays_date):
             url_empty.add(url)
             flag_asin = 'there is no a newer edition of this item'
             print flag_asin
-    return titles, asin, newed_asin, flag_asin, todays_date
+        return titles, asin, newed_asin, flag_asin, todays_date
 
 
 if __name__ == '__main__':
