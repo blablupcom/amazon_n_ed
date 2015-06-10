@@ -8,13 +8,16 @@ import re
 user_agent = {'User-Agent': 'Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)'}
 
 
-def amazon_req(titles, asin, newed_asin, flag_asin, todays_date):
-    url_empty = set()
-    for url in f.readlines():
-        print url
+def amazon_req(url):
+        pages =''
+        #titles = ''
+        todays_date = ''
+        asin = ''
+        newed_asin = ''
+        flag_asin = ''
         try:
              pages = requests.get(url.strip(), headers = user_agent)
-        except: continue
+        except: pass
         soup = bs(pages.text)
         titles =  soup.find('title').text
         tag = soup.find(text = re.compile('There is a newer edition of this item'))
@@ -35,13 +38,11 @@ def amazon_req(titles, asin, newed_asin, flag_asin, todays_date):
 
 if __name__ == '__main__':
     with open(' test.txt') as f:
-        titles = ''
-        todays_date = ''
-        asin = ''
-        newed_asin = ''
-        flag_asin = ''
-        titles, asin, newed_asin, flag_asin, todays_date = amazon_req(titles, asin, newed_asin, flag_asin, todays_date )
-        scraperwiki.sqlite.save(unique_keys=['a'], data={"a": asin, "flag": flag_asin, "d": todays_date })
-        while titles == 'Robot Check':
-            titles, asin, newed_asin, flag_asin, todays_date = amazon_req(titles, asin, newed_asin, flag_asin, todays_date )
-            scraperwiki.sqlite.save(unique_keys=['asin'], data={"asin": asin, "new_edition_asin": newed_asin,"flag": flag_asin, "date": todays_date })
+
+        url_empty = set()
+        for url in f.readlines():
+            titles, asin, newed_asin, flag_asin, todays_date = amazon_req(url)
+            scraperwiki.sqlite.save(unique_keys=['a'], data={"a": asin, "new_edition_asin": newed_asin, "flag": flag_asin, "d": todays_date })
+            while titles == 'Robot Check':
+                titles, asin, newed_asin, flag_asin, todays_date = amazon_req(url)
+                scraperwiki.sqlite.save(unique_keys=['asin'], data={"asin": asin, "new_edition_asin": newed_asin, "flag": flag_asin, "date": todays_date })
