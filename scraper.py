@@ -44,4 +44,4 @@ if __name__ == '__main__':
         scraperwiki.sqlite.save(unique_keys=['a'], data={"a": asin, "flag": flag_asin, "d": todays_date })
         while titles == 'Robot Check':
             titles, asin, newed_asin, flag_asin, todays_date = amazon_req(titles, asin, newed_asin, flag_asin, todays_date )
-            scraperwiki.sqlite.save(unique_keys=['a'], data={"asin": asin, "new_edition_asin": newed_asin,"flag": flag_asin, "d": todays_date })
+            scraperwiki.sqlite.save(unique_keys=['asin'], data={"asin": asin, "new_edition_asin": newed_asin,"flag": flag_asin, "date": todays_date })
