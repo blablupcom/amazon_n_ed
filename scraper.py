@@ -19,9 +19,10 @@ with open(' test.txt') as f:
         for url in f.readlines():
             try:
                 pages = requests.get(url.strip(), headers = user_agent)
-            except: pass
+            except: continue
             soup = bs(pages.text)
-            titles =  soup.find('title').text
+            title =  soup.find('title').text
+            print title
             tag = soup.find(text = re.compile('There is a newer edition of this item'))
             if tag:
                 newed_asin = tag.find_next('a')['href'].split('dp/')[1].split('/')[0]
@@ -30,7 +31,7 @@ with open(' test.txt') as f:
                 if url in url_empty:
                     flag_asin = url.split('dp/')[1].split('/')[0]
                     url_empty.remove(url)
-                print asin, newed_asin, flag_asin
+                print asin
             else:
                 url_empty.add(url)
                 flag_asin = 'there is no a newer edition of this item'
