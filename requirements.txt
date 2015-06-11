@@ -1,2 +1,4 @@
 unirest
 beautifulsoup4
+-e git+http://github.com/openaustralia/scraperwiki-python.git@morph_defaults#egg=scrap
+erwiki
