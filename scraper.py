@@ -21,7 +21,7 @@ with open(' test.txt') as f:
                 pages = requests.get(url.strip(), headers = user_agent)
             except: continue
             soup = bs(pages.text)
-            title =  soup.find('title').text
+            title =  soup.find('title').text.encode('utf-8')
             print title
             tag = soup.find(text = re.compile('There is a newer edition of this item'))
             if tag:
