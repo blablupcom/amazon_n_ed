@@ -8,13 +8,9 @@ import re
 user_agent = {'User-Agent': 'Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)'}
 
 
-with open(' test.txt') as f:
-        pages =''
-        #title = ''
+with open('test.txt') as f:
+
         todays_date = ''
-        asin = ''
-        newed_asin = ''
-        flag_asin = ''
         url_empty = set()
         for url in f.readlines():
             try:
