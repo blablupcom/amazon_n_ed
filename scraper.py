@@ -16,7 +16,6 @@ with open('test.txt') as f:    # open test.txt file containing the list of url
             except: continue
             soup = bs(pages.raw_body)
             title =  soup.find('title').text.encode('utf-8')
-            print title
             tag = soup.find(text = re.compile('There is a newer edition of this item'))  # find the text on the page
             todays_date = str(datetime.now())
             if tag:                                                                      # if text found
