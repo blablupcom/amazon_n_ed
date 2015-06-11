@@ -10,7 +10,7 @@ user_agent = {'User-Agent': 'Mozilla/5.0 (compatible; bingbot/2.0; +http://www.b
 
 with open(' test.txt') as f:
         pages =''
-        #titles = ''
+        #title = ''
         todays_date = ''
         asin = ''
         newed_asin = ''
@@ -27,6 +27,7 @@ with open(' test.txt') as f:
             if tag:
                 newed_asin = tag.find_next('a')['href'].split('dp/')[1].split('/')[0]
                 asin = url.split('dp/')[-1]
+                flag_asin = ''
                 todays_date = str(datetime.now())
                 if url in url_empty:
                     flag_asin = url.split('dp/')[1].split('/')[0]
@@ -34,6 +35,8 @@ with open(' test.txt') as f:
                 print asin
             else:
                 url_empty.add(url)
+                asin = url.split('dp/')[-1]
+                newed_asin = ''
                 flag_asin = 'there is no a newer edition of this item'
                 print flag_asin
             scraperwiki.sqlite.save(unique_keys=['asin'], data={"asin": asin, "new_edition_asin": newed_asin, "flag": flag_asin, "d": todays_date })
