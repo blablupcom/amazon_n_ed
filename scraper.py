@@ -1,6 +1,6 @@
 from datetime import datetime
 from bs4 import BeautifulSoup as bs
-import requests
+import unirest
 import scraperwiki
 import re
 
@@ -10,11 +10,11 @@ user_agent = {'User-Agent': 'Mozilla/5.0 (compatible; bingbot/2.0; +http://www.b
 
 with open('test.txt') as f:    # open test.txt file containing the list of url
         url_empty = set()
-        for url in f.readlines():      # read every line of the file
+        for url in f.xreadlines():      # read every line of the file
             try:
-                pages = requests.get(url.strip(), headers = user_agent)    # make a request to the url
+                pages = unirest.get(url.strip(), headers = user_agent)    # make a request to the url
             except: continue
-            soup = bs(pages.text)
+            soup = bs(pages.raw_body)
             title =  soup.find('title').text.encode('utf-8')
             print title
             tag = soup.find(text = re.compile('There is a newer edition of this item'))  # find the text on the page
