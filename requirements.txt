@@ -1,4 +1,4 @@
+-e git+http://github.com/openaustralia/scraperwiki-python.git@morph_defaults#egg=scraperwiki
 unirest
-beautifulsoup4==4.2.0
--e git+http://github.com/openaustralia/scraperwiki-python.git@morph_defaults#egg=scrap
-erwiki
+beautifulsoup4
+# Custom version of scraperwiki library
