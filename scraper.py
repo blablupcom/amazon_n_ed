@@ -16,6 +16,20 @@ with open('test.txt') as f:    # open test.txt file containing the list of url
             except: continue
             soup = bs(pages.raw_body)
             title =  soup.find('title').text.encode('utf-8')
+            buybox = ''
+            try:
+                buybox = soup.find('div', attrs={'id': 'buybox'})
+            except: pass
+            buy_new = ''
+            buy_used = ''
+            if buybox:
+                try:
+                    buy_new = soup.find('span', 'a-size-medium a-color-price offer-price a-text-normal').text
+                except: pass
+                try:
+                    buy_used = soup.find('span', 'a-color-base offer-price a-text-normal').text
+                except: pass
+            print title, buy_new, buy_used
             tag = soup.find(text = re.compile('There is a newer edition of this item'))  # find the text on the page
             todays_date = str(datetime.now())
             if tag:                                                                      # if text found
@@ -32,5 +46,5 @@ with open('test.txt') as f:    # open test.txt file containing the list of url
                 newed_asin = ''
                 flag_asin = 'there is no a newer edition of this item'   # set the flag that there is no a newer edition of this item
                 print flag_asin
-            scraperwiki.sqlite.save(unique_keys=['asin'], data={"asin": asin, "new_edition_asin": newed_asin, "flag": flag_asin, "d": todays_date })  # save data into sql database
+            scraperwiki.sqlite.save(unique_keys=['asin'], data={"asin": asin.strip(), "new_edition_asin": newed_asin, "flag": flag_asin, "price_new": buy_new, "price_used": buy_used, "d": todays_date })  # save data into sql database
 
