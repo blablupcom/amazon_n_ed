@@ -29,7 +29,6 @@ with open('test.txt') as f:    # open test.txt file containing the list of url
                 try:
                     buy_used = soup.find('span', 'a-color-base offer-price a-text-normal').text
                 except: pass
-            print title, buy_new, buy_used
             tag = soup.find(text = re.compile('There is a newer edition of this item'))  # find the text on the page
             todays_date = str(datetime.now())
             if tag:                                                                      # if text found
